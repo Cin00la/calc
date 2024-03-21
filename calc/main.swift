@@ -9,6 +9,24 @@
 import Foundation
 
 var args = ProcessInfo.processInfo.arguments
-args.removeFirst() // remove the name of the program
+args.removeFirst() // removes the name of the program
 
-print(Int(args[0])!)
+let calculation = Calculation();
+let errorHandle = ErrorHandling();
+do{
+    try errorHandle.errorPrevention(args: args)
+    let newArgs = calculation.dNegationToPositive(args: args);
+    let finalResult = calculation.recursion(args: newArgs);
+    print(Int(finalResult[0])!);
+}
+catch CalculationError.divisionByZero{
+        print("Invalid Output")
+        exit(1);
+        
+}
+catch CalculationError.invalidOutput{
+        print("Invalid Output")
+        exit(1);
+        
+}
+
